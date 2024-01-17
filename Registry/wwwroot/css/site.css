@@ -1,0 +1,121 @@
+html {
+  font-size: 14px;
+ 
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.photo_city {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    z-index: -10;
+    background-repeat: no-repeat;
+    opacity: 0.85;
+    background-attachment: fixed;
+}
+.bus {
+    background-position: center -95px;
+    background-image: url("/img/city.jpg");
+}
+.parent_info {
+    margin: 15px 10px;
+    align-items: baseline;
+    padding: 15px 10px;
+    box-shadow: -1px -2px 12px #5e7493a3;
+    border-radius: 10px;
+    position: relative;
+}
+.price {
+    display: flex;
+    position: absolute;
+    top: 30%;
+    right: 10px;
+}
+.price div:first-of-type{
+    margin-top: 8px;
+}
+.price div button {
+    background-color: #B8CEE5;
+    color: white;
+}
+.info_bus {
+    display: flex;
+}
+.info_bus div, .parent_info div{
+    margin-right: 10px;
+}
+.img_clock{
+    width: 15px;
+    margin-top: -4px;
+}
+.journey_time, .small_info_days {
+    color: #5E7493;
+    font-size: 0.8em;
+}
+.big_info_time{
+    font-size:2em;
+    font-weight:bold;
+}
+.train {
+    background-position: center -322px;
+    background-image: url("/img/train.jpg");
+}
+.photo_city div[class="form-floating"] {
+    width: 20%;
+}
+.photo_city h1{
+    color: white;
+    padding: 32px;
+}
+.photo_city button:hover, .price div button:hover {
+    cursor: pointer;
+    background: #d3d4d5;
+    border-color: #c6c7c8;
+}
+.arrow-parrent:hover div {
+    cursor: pointer;
+    background-image: url("/img/arrow-hover.png");
+}
+.photo_city button, .price div button:hover {
+    transition-duration: 0.4s;
+}
+.photo_city input[type="date"] {
+    border-radius: 5px;
+    border: none;
+}
+.arrow-parrent {
+    position: relative;
+}
+.arrow-right, .arrow-left {
+    width: 15px;
+    height: 15px;
+    right: -8px;
+    background-position-x: right;
+    background-image: url("/img/icons8-arrow-24.png");
+    z-index: 100;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+.arrow-right {
+    top: 12px;
+}
+.arrow-left {
+    top: 30px;
+    transform: rotate(-180deg);
+}
+.buy {
+    display: flex;
+    justify-content: center
+}

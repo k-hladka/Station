@@ -1,0 +1,48 @@
+﻿@using Registry.Utilites;
+@model object[]
+<div class="text-center">
+    <div class="photo_city bus">
+        <h1>Купуй квиток на автобус онлайн</h1>
+        @using (Html.BeginForm("Index", "Bus", FormMethod.Post, new { @class = "buy" }))
+        {
+            @await Html.PartialAsync("_FormTicket", (Model?.Count() > 0) ? new[]{Model[1].ToString(), Model[2].ToString(), Model[3].ToString()} : null);
+        ;
+        }
+    </div>
+</div>
+
+@if (Model?.Count() > 0){
+    @foreach (Schedule i in (IEnumerable<Schedule>)Model[0])
+        {
+            var journey_time_arr = @i.TransportInfoNavigation.JourneyTime.Split(':');
+            <div class="parent_info">
+                <div class="info_bus">
+                    <div>
+                        <div class="big_info_time">@i.DepartureTime.ToString().Substring(0, 5)</div>
+                        <div class="small_info_days">@Utilit.dayOfWeek(@i.DepartureDate.DayOfWeek.ToString()), @i.DepartureDate.Day @Utilit.mounthToString(@i.DepartureDate.Month)</div>
+                    </div>
+                    <div class="journey_time">------------ <img class="img_clock" src="~/img/icons8-clock-24.png"> @journey_time_arr[0]год @journey_time_arr[1]хв ---------------</div>
+                    <div>
+                        <div class="big_info_time">@i.ArriveTime.ToString().Substring(0, 5)</div>
+                        <div class="small_info_days">@Utilit.dayOfWeek(@i.ArriveDate.DayOfWeek.ToString()), @i.ArriveDate.Day @Utilit.mounthToString(@i.ArriveDate.Month)</div>
+                    </div>
+                </div>
+                <div class="price">
+                    <div>@i.TransportInfoNavigation.Price.ToString().Substring(0, @i.TransportInfoNavigation.Price.ToString().Length-2) грн.</div>
+                <div>
+                    @using (Html.BeginForm("Buy", "Bus", FormMethod.Post)){
+                        <input style="display:none" value=@i.Id name="numberBus"/>
+                        <button class="btn btn-light buy_bus">Обрати</button>
+                    }
+                </div>
+                </div>
+            </div>
+            @*Console.WriteLine(i.DateTime + "\n" + i.TransportInfoNavigation.FromCity.Name + " - " +
+                             *i.TransportInfoNavigation.ToCity.Name + " = " + i.TransportInfoNavigation.Price +
+                             *"грн; тип транспорту та кількість міст = " + i.TransportInfoNavigation.TypeTransport.Name +
+                             *" " + i.TransportInfoNavigation.TypeTransport.CoutSeats + "час подорожі = " +
+                             *i.TransportInfoNavigation.JourneyTime);
+                             *@
+        }
+
+}

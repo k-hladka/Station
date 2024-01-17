@@ -1,0 +1,10 @@
+﻿<div class="text-center">
+    <div class="photo_city train">
+        <h1>Купуй квиток на потяг онлайн</h1>
+        @using (Html.BeginForm("Index", "Train", FormMethod.Post, new { @class = "buy" }))
+        {
+            @await Html.PartialAsync("_FormTicket")
+            ;
+        }
+    </div>
+</div>

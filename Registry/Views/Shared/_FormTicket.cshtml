@@ -1,0 +1,32 @@
+﻿@model string[];
+@{
+    var dateNow = @DateTime.Now.Date;
+    Console.Write(dateNow.DayOfWeek);
+    var year = dateNow.Year;
+    var dateNowStr = dateNow.ToString("d").Split('.');
+    var finalDate = dateNowStr[2] + "-" + dateNowStr[1] + "-" + dateNowStr[0];
+    var maxDate = year + "-12-31";
+    string from = "Київ";
+    string to = "Харків";
+    string date = finalDate;
+    if (Model?.Length > 0)
+    {
+        from = (Model[0]?.Length <= 0) ? from : Model[0];
+        to = (Model.Length > 0 && Model[1]?.Length <= 0) ? to : Model[1];
+        date = (Model.Length > 0 && Model[2]?.Length <= 0) ? date : Model[2];
+    }
+}
+<div class="form-floating">
+    @Html.TextBox("from",from, new{@class="form-control"})
+    @Html.Label("from", "Звідки?", new{@class="form-label"})
+</div>
+<div class="arrow-parrent">
+    <div class="arrow-right"></div>
+    <div class="arrow-left"></div>
+</div>
+<div class="form-floating">
+    @Html.TextBox("to",to, new{@class="form-control"})
+    @Html.Label("Куди?")
+</div>
+@Html.TextBox("date",date, new{type="date", min=finalDate, max=maxDate})
+<button type="submit" class="btn btn-light">Знайти</button>
