@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Azure.Core;
+using Microsoft.IdentityModel.Tokens;
 using Registry.Models;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -7,14 +8,14 @@ namespace Registry.Utilites
 {
     public class Utilit
     {
-        public static bool checkCity(string city) {
-            if(city.IsNullOrEmpty())
+        public static bool checkCityorInitial(string cityOrInitial) {
+            if(cityOrInitial.IsNullOrEmpty())
                 return false;
-            city = Utilit.stringToLower(city);
-            if(city.Length > 255 || city.Length < 4) 
+            cityOrInitial = Utilit.stringToLower(cityOrInitial);
+            if(cityOrInitial.Length > 255 || cityOrInitial.Length < 2) 
                 return false;
             Regex regex = new Regex(@"[\d!@#$%^&*()=_+`~"";:.,<>/?\\|}{[\]]");
-            Match match = regex.Match(city);
+            Match match = regex.Match(cityOrInitial);
             if (match.Success)
                 return false;
             return true;
@@ -87,6 +88,38 @@ namespace Registry.Utilites
                 case 12: result = "Грудня"; break;
             }
             return result;
+        }
+        public static bool chechCountOfSeats(string count)
+        {
+            if(count.IsNullOrEmpty())
+                return false;
+            Regex regex = new Regex(@"^\d$");
+            Match match = regex.Match(count);
+            if (!match.Success)
+                return false;
+            int countInt = Int32.Parse(count.ToString());
+            if(countInt < 1 || countInt > 4)
+                return false;
+
+            return true;
+        }
+        public static bool chechEmail(string email)
+        {
+            if(email.IsNullOrEmpty()) return false;
+            email=Utilit.stringToLower(email);
+            Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            Match match = regex.Match(email);
+            if (!match.Success) return false;
+            return true;
+        }
+        public static bool checkPhone(string phone)
+        {
+            if(phone.IsNullOrEmpty()) return false;
+            if(phone.Length < 10 && phone.Length>13) return false;
+            Regex regex = new Regex(@"^[+]?[(]?[0-9]{1,3}[)]?[-\s\./0-9]*$");
+            Match match = regex.Match(phone);
+            if (!match.Success) return false;
+            return true;
         }
     }
 }

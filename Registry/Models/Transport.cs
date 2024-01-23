@@ -9,7 +9,5 @@ public partial class Transport
 
     public string Name { get; set; } = null!;
 
-    public int CoutSeats { get; set; }
-
-    public virtual ICollection<JourneyInfo> JourneyInfos { get; set; } = new List<JourneyInfo>();
+    public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
 }

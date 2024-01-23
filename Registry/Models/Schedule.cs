@@ -17,5 +17,11 @@ public partial class Schedule
 
     public TimeSpan ArriveTime { get; set; }
 
+    public int TypeTransportId { get; set; }
+
+    public int CountSeats { get; set; }
+
     public virtual JourneyInfo TransportInfoNavigation { get; set; } = null!;
+
+    public virtual Transport TypeTransport { get; set; } = null!;
 }

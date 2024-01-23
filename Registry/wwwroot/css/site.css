@@ -9,9 +9,17 @@ html {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+footer.footer[b-z3rtf7vs6j] {
+    
+}
 html {
   position: relative;
   min-height: 100%;
@@ -25,11 +33,14 @@ html {
     opacity: 0.85;
     background-attachment: fixed;
 }
+.error{
+    color: red;
+}
 .bus {
     background-position: center -95px;
     background-image: url("/img/city.jpg");
 }
-.parent_info {
+.parent_info, .parent_initials, .parent_email_tel {
     margin: 15px 10px;
     align-items: baseline;
     padding: 15px 10px;
@@ -46,10 +57,10 @@ html {
 .price div:first-of-type{
     margin-top: 8px;
 }
-.price div button {
-    background-color: #B8CEE5;
-    color: white;
-}
+    .price div button, .count_of_seats button, .track_order button {
+        background-color: #B8CEE5;
+        color: white;
+    }
 .info_bus {
     display: flex;
 }
@@ -64,8 +75,10 @@ html {
     color: #5E7493;
     font-size: 0.8em;
 }
-.big_info_time{
-    font-size:2em;
+.big_info_time {
+    font-size: 2em;
+}
+.big_info_time, .passenger{
     font-weight:bold;
 }
 .train {
@@ -79,17 +92,24 @@ html {
     color: white;
     padding: 32px;
 }
-.photo_city button:hover, .price div button:hover {
+.photo_city button:hover, .price div button:hover, .count_seats button:hover, .track_order button:hover {
     cursor: pointer;
     background: #d3d4d5;
     border-color: #c6c7c8;
+    transition-duration: 0.4s;
 }
 .arrow-parrent:hover div {
     cursor: pointer;
     background-image: url("/img/arrow-hover.png");
 }
-.photo_city button, .price div button:hover {
-    transition-duration: 0.4s;
+.count_seats select {
+    width: 5%;
+    margin: 0 10px;
+}
+.count_seats {
+    display: flex;
+    align-items: center;
+    margin: 15px 10px;
 }
 .photo_city input[type="date"] {
     border-radius: 5px;
@@ -115,7 +135,22 @@ html {
     top: 30px;
     transform: rotate(-180deg);
 }
-.buy {
+.buy, .parent_initials, .parent_email_tel {
     display: flex;
+}
+.parent_initials, .parent_email_tel {
+    flex-wrap: wrap;
+}
+.passenger{
+    width:100%;
+    padding: 10px;
+}
+.track_order button{
+    margin: 15px 10px;
+}
+span.passenger{
+    font-weight: bold;
+}
+.buy {
     justify-content: center
 }

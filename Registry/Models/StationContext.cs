@@ -59,7 +59,6 @@ public partial class StationContext : DbContext
                 .HasColumnType("smallmoney")
                 .HasColumnName("price");
             entity.Property(e => e.ToCityId).HasColumnName("to_city_id");
-            entity.Property(e => e.TypeTransportId).HasColumnName("type_transport_id");
 
             entity.HasOne(d => d.FromCity).WithMany(p => p.JourneyInfoFromCities)
                 .HasForeignKey(d => d.FromCityId)
@@ -70,11 +69,6 @@ public partial class StationContext : DbContext
                 .HasForeignKey(d => d.ToCityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Schedule__to_cit__4316F928");
-
-            entity.HasOne(d => d.TypeTransport).WithMany(p => p.JourneyInfos)
-                .HasForeignKey(d => d.TypeTransportId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Schedule__type_t__4222D4EF");
         });
 
         modelBuilder.Entity<Schedule>(entity =>
@@ -85,22 +79,26 @@ public partial class StationContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.ArriveDate)
-                .HasDefaultValueSql("('20241010')")
                 .HasColumnType("date")
                 .HasColumnName("arrive_date");
-            entity.Property(e => e.ArriveTime)
-                .HasDefaultValueSql("('06:10')")
-                .HasColumnName("arrive_time");
+            entity.Property(e => e.ArriveTime).HasColumnName("arrive_time");
+            entity.Property(e => e.CountSeats).HasColumnName("count_seats");
             entity.Property(e => e.DepartureDate)
                 .HasColumnType("date")
                 .HasColumnName("departure_date");
             entity.Property(e => e.DepartureTime).HasColumnName("departure_time");
             entity.Property(e => e.TransportInfo).HasColumnName("transport_info");
+            entity.Property(e => e.TypeTransportId).HasColumnName("type_transport_id");
 
             entity.HasOne(d => d.TransportInfoNavigation).WithMany(p => p.Schedules)
                 .HasForeignKey(d => d.TransportInfo)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Schedule__transp__49C3F6B7");
+
+            entity.HasOne(d => d.TypeTransport).WithMany(p => p.Schedules)
+                .HasForeignKey(d => d.TypeTransportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Schedule__type_t__02FC7413");
         });
 
         modelBuilder.Entity<Transport>(entity =>
@@ -112,7 +110,6 @@ public partial class StationContext : DbContext
             entity.HasIndex(e => e.Name, "UQ__Transpor__72E12F1B62CB6FE9").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CoutSeats).HasColumnName("cout_seats");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .IsUnicode(false)
