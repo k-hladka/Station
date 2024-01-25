@@ -20,7 +20,7 @@ namespace Registry.Utilites
                 return false;
             return true;
         }
-        public static bool checkDate(string date)
+        public static bool checkDate(string date, string time="")
         {
             //2024-01-11 - parametr date
             //11.01.2024 00:00:00 - datetime.now
@@ -36,10 +36,25 @@ namespace Registry.Utilites
             //currencyDate.Day > dateInt[2] 
             //    || currencyDate.Year != dateInt[0]
             //    || currencyDate.Month > dateInt[1]
-            if (currencyDate.Year == dateInt[0] &&
-                (currencyDate.Month < dateInt[1] || 
-                (currencyDate.Month == dateInt[1] && currencyDate.Day <= dateInt[2])))
-                return true;
+            if(currencyDate.Year == dateInt[0])
+            {
+                if (currencyDate.Month < dateInt[1])
+                    return true;
+                if(currencyDate.Month == dateInt[1] && currencyDate.Day < dateInt[2])
+                    return true;
+                if(currencyDate.Month == dateInt[1] && currencyDate.Day == dateInt[2])
+                {
+                    if(time.IsNullOrEmpty()) return true;
+                    else
+                    {
+                        if(Convert.ToInt32(time.Substring(0, 2)) > DateTime.Now.Hour || 
+                            (Convert.ToInt32(time.Substring(0, 2)) == DateTime.Now.Hour &&
+                            Convert.ToInt32(time.Substring(3, 2)) >= DateTime.Now.Minute))
+                            return true;
+                    }
+                }
+                return false;
+            }
             return false;
         }
         public static int[] splitDate(string date, char separator)

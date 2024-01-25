@@ -2,6 +2,11 @@ html {
   font-size: 14px;
  
 }
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -18,11 +23,11 @@ header {
     z-index: 10;
 }
 footer.footer[b-z3rtf7vs6j] {
-    
+    position: relative;
 }
 html {
   position: relative;
-  min-height: 100%;
+  min-height: 100vh;
 }
 .photo_city {
     width: 100%;
@@ -57,10 +62,10 @@ html {
 .price div:first-of-type{
     margin-top: 8px;
 }
-    .price div button, .count_of_seats button, .track_order button {
-        background-color: #B8CEE5;
-        color: white;
-    }
+.price div button, .count_of_seats button, .track_order button {
+    background-color: #B8CEE5;
+    color: white;
+}
 .info_bus {
     display: flex;
 }
@@ -83,7 +88,61 @@ html {
 }
 .train {
     background-position: center -322px;
-    background-image: url("/img/train.jpg");
+    background-image: url("/img/background-technology-world-map-that-can-search-for-addresses-through-the-internet-at-all-times-to-know-the-location-and-topography-of-the-destination-able-to-travel-more-ea.jpg");
+}
+.often_questions div{
+    width: 80%;
+    margin-left: 6%;
+}
+.often_questions div div:hover{
+    background-color: #cff4fc5c;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+.often_questions output {
+    text-align: left;
+    padding: 15px 50px;
+    display:none;
+}
+.visible {
+    display: block !important;
+}
+.often_questions div div {
+    height: 4rem;
+    border: 1px solid #5E7493;
+    border-radius: 5px;
+    margin-bottom:5px;
+}
+.often_questions span{
+display: inline-block;
+float: right;
+font-weight: 900;
+}
+.parent-question {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.input_cities, .station,.ticket,.done {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;   
+}
+.input_cities {
+    background-image: url("/img/icons8-map-100.png");
+}
+.station {
+    background-image: url("/img/icons8-station-100.png");
+}
+.ticket {
+    background-image: url("/img/icons8-ticket-100.png");
+}
+.done {
+    background-image: url("/img/icons8-tick-100.png");
+}
+.question {
+    width: 25px;
+    height: 25px;
+    background-image: url("/img/icons8-question-mark-25.png");
 }
 .photo_city div[class="form-floating"] {
     width: 20%;
@@ -153,4 +212,15 @@ span.passenger{
 }
 .buy {
     justify-content: center
+}
+
+@media (max-width:600px){
+    .often_questions div{
+        margin: 0;
+        width: 100%;
+    }
+    div#description{
+        margin:5px!important;
+        width: 100%;
+    }
 }

@@ -42,30 +42,72 @@ namespace Registry.Controllers
                            12.01.2024 00:00:00 - парсинг
                         */
                         var d = DateTime.Now;
-                        /* do
-                         {
-                             d = d.Date.AddDays(1);
-                             d = d.AddHours(22);
-                             if (d.DayOfWeek == DayOfWeek.Thursday)
-                             {
+                        var arrive = d;
+                        var count = 0;
+                       /* foreach (Schedule i in infoTicket)
+                        {
+                            if (i.TransportInfo==7 && i.DepartureTime == new TimeSpan(16, 10, 00))
+                            {
+                                i.ArriveTime = new TimeSpan(23, 40, 00);
+                                context.SaveChanges();
+                            }
+                        }*/
+                        /*  do
+                           {
+                              if (count != 0)
+                              {
+                                  d = d.Date.AddDays(1);
+                                  d = d.AddHours(22);
+                              }
+                              arrive = d.Date.AddDays(1);
 
-                                 Console.WriteLine(d);
-                                 context.Schedules.Add(new Schedule() { DateTime = d, TransportInfo = 8 });
-                                 context.SaveChanges();
-                             }
 
-                         } while (d.Year == DateTime.Now.Year);*/
+                          switch (d.DayOfWeek)
+                              {
+                                  *//*case DayOfWeek.Monday: 
+                                      context.Schedules.Add(new Schedule() { TransportInfo= 4, DepartureDate = d,  DepartureTime = new TimeSpan(05,10,00), ArriveDate = d,  ArriveTime = new TimeSpan(14,10,00), TypeTransportId = 3,CountSeats= 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo= 4, DepartureDate = d,  DepartureTime = new TimeSpan(22,10,00), ArriveDate = arrive,  ArriveTime = new TimeSpan(07,10,00), TypeTransportId = 4,CountSeats= 53 }); break;
+                                    *//*
+                                  case DayOfWeek.Tuesday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(07, 10, 00), ArriveDate = d, ArriveTime = new TimeSpan(14, 40, 00), TypeTransportId = 1, CountSeats = 18 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(16, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(01, 10, 00), TypeTransportId = 3, CountSeats = 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(05, 40, 00), TypeTransportId = 1, CountSeats = 18 }); break;
+                                  case DayOfWeek.Wednesday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(16, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(01, 10, 00), TypeTransportId = 3, CountSeats = 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(05, 40, 00), TypeTransportId = 1, CountSeats = 18 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(07, 10, 00), TypeTransportId = 1, CountSeats = 18 }); break;
+                                  case DayOfWeek.Thursday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(10, 10, 00), ArriveDate = d, ArriveTime = new TimeSpan(19, 10, 00), TypeTransportId = 1, CountSeats = 18 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(05, 40, 00), TypeTransportId = 1, CountSeats = 18 }); break;
+                                  case DayOfWeek.Friday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(16, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(00, 40, 00), TypeTransportId = 3, CountSeats = 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 7, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(05, 40, 00), TypeTransportId = 1, CountSeats = 18 }); break;
+                                  case DayOfWeek.Saturday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(05, 10, 00), ArriveDate = d, ArriveTime = new TimeSpan(14, 10, 00), TypeTransportId = 3, CountSeats = 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(16, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(01, 10, 00), TypeTransportId = 3, CountSeats = 40 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(22, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(07, 10, 00), TypeTransportId = 4, CountSeats = 53 }); break;
+                                     case DayOfWeek.Sunday:
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(10, 10, 00), ArriveDate = d, ArriveTime = new TimeSpan(19, 10, 00), TypeTransportId = 1, CountSeats = 18 });
+                                      context.Schedules.Add(new Schedule() { TransportInfo = 4, DepartureDate = d, DepartureTime = new TimeSpan(16, 10, 00), ArriveDate = arrive, ArriveTime = new TimeSpan(01, 10, 00), TypeTransportId = 3, CountSeats = 40 }); break;
+                              }
+
+
+                                   context.SaveChanges();
+                              count = 1;
+
+                           } while (d.Year == DateTime.Now.Year);*/
                         foreach (Schedule i in infoTicket)
                         {
                             if (Utilit.stringToLower(i.TransportInfoNavigation.FromCity.Name) == Utilit.stringToLower(Request.Form["from"]) &&
                                 Utilit.stringToLower(i.TransportInfoNavigation.ToCity.Name) == Utilit.stringToLower(Request.Form["to"]) &&
                                 DateTime.Parse(Request.Form["date"]).Day.CompareTo(i.DepartureDate.Day) == 0 &&
                                 DateTime.Parse(Request.Form["date"]).Month.CompareTo(i.DepartureDate.Month) == 0 &&
-                                Convert.ToInt32(i.DepartureTime.ToString().Substring(0, 2)) >= DateTime.Now.Hour)
+                                Utilit.checkDate(Request.Form["date"], i.DepartureTime.ToString()))
                             {
                                 buses.Add(i);
                             }
                         }
+                        buses.Sort((prev, next) =>prev.DepartureTime.CompareTo(next.DepartureTime));
                         object[] result = new object[] { buses, Request.Form["from"], Request.Form["to"], Request.Form["date"] };
                         return View(result);
                         /* foreach (Schedule i in x)
