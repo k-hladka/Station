@@ -39,9 +39,36 @@
                             <button class="btn btn-light buy_bus">Обрати</button>
                         }
                     </div>
-                
+
                 </div>
             <div class="text-end text-danger">Кількість вільних місць, що залишились: @i.CountSeats</div>
+                @if (i.TransportInfoNavigation.PassingCities != null)
+                {
+                    var citiesFrom = Utilit.splitCitiesFromJSON(i.TransportInfoNavigation.PassingCities);
+                    <div class="details">
+                        <button type="button" class="btn btn-light">Деталі рейсу</button>
+                        <table>
+                            <tr>
+                                <th>Місто</th>
+                                <th>Прибуття</th>
+                                <th>Зупинка</th>
+                            </tr>
+                            @foreach (var arr in citiesFrom)
+                            {
+                                <tr>
+                                    @foreach (var k in arr)
+                                    {
+                                        <td>
+                                            @if(k.Key == "прибуття")
+                                                @Utilit.timeArriveAcross(i.DepartureTime, k.Value)
+                                            else  @k.Value
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                }
             </div>
             }
             @*Console.WriteLine(i.DateTime + "\n" + i.TransportInfoNavigation.FromCity.Name + " - " +

@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Registry.Models;
+using RestSharp;
 using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -135,6 +137,39 @@ namespace Registry.Utilites
             Match match = regex.Match(phone);
             if (!match.Success) return false;
             return true;
+        }
+        public static List<Dictionary<string, string>> splitCitiesFromJSON(string cities)
+        {
+            var res = new List<Dictionary<string, string>>();
+            string[] splitDate = cities.Split("},");
+            Regex regex = new Regex(@"""[\da-zа-яіїґ:]+""", RegexOptions.IgnoreCase);
+           
+            foreach (var i in splitDate)
+            {
+                var match = Regex.Matches(i, regex.ToString(), RegexOptions.IgnoreCase);
+               
+                var map = new Dictionary<string, string>();
+                map.Add("місто", Utilit.deleteQuote(match[0].Value));
+                map.Add(deleteQuote(match[1].Value),deleteQuote(match[2].Value));
+                map.Add(deleteQuote(match[3].Value), deleteQuote(match[4].Value));
+                res.Add(map);
+            }
+            return res;
+
+        }
+        public static string deleteQuote(string str)
+        {
+            return str.Substring(1, str.Length-2);
+        }
+        public static TimeSpan timeArriveAcross(TimeSpan departureTime, string time)
+        {
+            var times = Utilit.splitDate(time, ':');
+            TimeSpan ts = new TimeSpan(times[0], times[1], 0);
+            var finalTimestamp = departureTime.Add(ts);
+            if(finalTimestamp.Days > 0)
+                finalTimestamp = new TimeSpan(finalTimestamp.Hours, finalTimestamp.Minutes, finalTimestamp.Seconds);
+           
+            return finalTimestamp;
         }
     }
 }

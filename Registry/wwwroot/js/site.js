@@ -33,3 +33,22 @@ function deleteVisibleClass(parentTag) {
             tag.parentElement.querySelector('span').innerHTML = '+';
         }
 }
+
+document.documentElement.addEventListener('click', function (event) {
+    if (event.target.parentElement.classList.contains('details')) {
+        let parentElem = event.target.parentElement;
+        let table = parentElem.querySelector('table');
+        let mainDiv = parentElem.parentElement;
+        let divPrice = mainDiv.getElementsByClassName('price')[0];
+
+        if (table.classList.contains('tableVisible')) {
+            table.classList.remove('tableVisible');
+            divPrice.style.top = "30%";
+        }
+        else {
+            table.classList.add('tableVisible');
+            divPrice.style.top = "15.35%";
+        }
+        
+    }
+});
