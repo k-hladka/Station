@@ -1,17 +1,16 @@
 ﻿@model Dictionary<string, object>;
 @{
-    string name, surname, select="";
-}   
+    string name, surname, select = "";
+}
 <div class="text-center">
-    @using (Html.BeginForm("Buy", "Bus", FormMethod.Post, new { @class = "count_seats" }))
+    @using (Html.BeginForm("Buy", "Train", FormMethod.Post, new { @class = "count_seats" }))
     {
-
         @await Html.PartialAsync("_CountOfSeats", (Model?.Count() > 0) ? Model : null)
     }
 </div>
 @if (Model?.Count() > 0)
 {
-    @using (Html.BeginForm("Buy", "Bus", FormMethod.Post, new { @class = "initials" }))
+    @using (Html.BeginForm("Buy", "Train", FormMethod.Post, new { @class = "initials" }))
     {
         @await Html.PartialAsync("_Initials", (Model?.Count() > 0) ? Model : null)
     }

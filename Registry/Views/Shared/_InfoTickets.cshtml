@@ -1,0 +1,76 @@
+﻿@using Registry.Utilites;
+@model object[]
+@if (Model?.Count() > 0)
+{
+    var NumberTransport = "number" + Model[2].ToString();
+    var check = 0;
+    @foreach (Schedule i in (IEnumerable<Schedule>)Model[0])
+    {
+        check = 1;
+        var journey_time_arr = @i.TransportInfoNavigation.JourneyTime.Split(':');
+        if (@i.CountSeats > 0)
+        {
+            <div class="parent_info">
+                <div class="info_transport">
+                    <div>
+                        <div class="big_info_time">@i.DepartureTime.ToString().Substring(0, 5)</div>
+                        <div class="small_info_days">@Utilit.dayOfWeek(@i.DepartureDate.DayOfWeek.ToString()), @i.DepartureDate.Day @Utilit.mounthToString(@i.DepartureDate.Month)</div>
+                    </div>
+                    <div class="journey_time">------------ <img class="img_clock" src="~/img/icons8-clock-24.png"> @journey_time_arr[0]год @journey_time_arr[1]хв ---------------</div>
+                    <div>
+                        <div class="big_info_time">@i.ArriveTime.ToString().Substring(0, 5)</div>
+                        <div class="small_info_days">@Utilit.dayOfWeek(@i.ArriveDate.DayOfWeek.ToString()), @i.ArriveDate.Day @Utilit.mounthToString(@i.ArriveDate.Month)</div>
+                    </div>
+                </div>
+                <div class="price">
+                    <div>@i.TransportInfoNavigation.Price.ToString().Substring(0, @i.TransportInfoNavigation.Price.ToString().Length-2) грн.</div>
+                    <div>
+
+                        @using (Html.BeginForm(Model[1].ToString(), Model[2].ToString(), FormMethod.Post))
+                        {
+                            <input style="display:none" value=@i.Id name=@NumberTransport />
+                            <button class="btn btn-light buy_bus">Обрати</button>
+                        }
+                    </div>
+
+                </div>
+                <div class="text-end text-danger">Кількість вільних місць, що залишились: @i.CountSeats</div>
+                @if (i.TransportInfoNavigation.PassingCities != null)
+                {
+                    var citiesFrom = Utilit.splitCitiesFromJSON(i.TransportInfoNavigation.PassingCities);
+                    <div class="details">
+                        <button type="button" class="btn btn-light">Деталі рейсу</button>
+                        <table>
+                            <tr>
+                                <th>Місто</th>
+                                <th>Прибуття</th>
+                                <th>Зупинка</th>
+                            </tr>
+                            @foreach (var arr in citiesFrom)
+                            {
+                                <tr>
+                                    @foreach (var k in arr)
+                                    {
+                                        <td>
+                                            @if (k.Key == "прибуття")
+                                                @Utilit.timeArriveAcross(i.DepartureTime, k.Value)
+                                            else
+                                                @k.Value
+
+
+                                            </td>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                }
+            </div>
+        }
+    }
+    if(check == 0)
+    {
+        <div class="alert alert-primary text-center not_found" role="alert">На жаль, квитків не знайдено. Спробуйте ввести іншу дату</div>
+    }
+
+}

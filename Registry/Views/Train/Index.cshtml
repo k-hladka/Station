@@ -1,10 +1,12 @@
-﻿<div class="text-center">
+﻿@using Registry.Utilites;
+@model object[]
+<div class="text-center">
     <div class="photo_city train">
         <h1>Купуй квиток на потяг онлайн</h1>
         @using (Html.BeginForm("Index", "Train", FormMethod.Post, new { @class = "buy" }))
         {
-            @await Html.PartialAsync("_FormTicket")
-            ;
+            @await Html.PartialAsync("_FormTicket", (Model?.Count() > 0) ? new[]{Model[1].ToString(), Model[2].ToString(), Model[3].ToString()} : null);
         }
     </div>
 </div>
+@await Html.PartialAsync("_InfoTickets", (Model?.Count() > 0) ? new[]{Model[0], "Buy", "Train"} : null)

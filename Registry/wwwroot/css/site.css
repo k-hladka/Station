@@ -29,7 +29,11 @@ html {
   position: relative;
   min-height: 100vh;
 }
-.tableVisible{
+.not_found{
+    font-weight: bold;
+    padding: 30px;
+}
+.tableVisible {
     display: table !important;
 }
 .details table{
@@ -83,10 +87,10 @@ html {
     background-color: #B8CEE5;
     color: white;
 }
-.info_bus {
+.info_transport {
     display: flex;
 }
-.info_bus div, .parent_info div{
+.info_transport div, .parent_info div{
     margin-right: 10px;
 }
 .img_clock{

@@ -1,0 +1,31 @@
+﻿@model Dictionary<string, object>;
+@{
+    string name, surname, select = "";
+}
+
+<div class="error">
+    @if (Model?.Count() > 0 && Model.ContainsKey("count_of_seats_e"))
+    {
+        @Model["count_of_seats_e"];
+    }</div>
+<label for="count_of_seats">Оберіть кількість місць</label>
+<select name="count_of_seats" class="form-select" required="required">
+    @for (int i = 1; i < 5; i++)
+    {
+        if (Model?.Count() > 0)
+        {
+            if (Model["count_of_seats"].ToString() == i.ToString())
+                select = "selected";
+        }
+        else
+        {
+            if (i == 1)
+                select = "selected";
+        }
+
+        <!option value="@i" @select>@i</!option>
+        select = "";
+    }
+</select>
+<button type="submit" class="btn btn-light">Далі</button>
+  
