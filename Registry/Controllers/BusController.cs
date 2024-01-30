@@ -147,7 +147,7 @@ namespace Registry.Controllers
                     }
                     var email = new Email(Request.Form["email"], "Квитки", textTicket.ToString());
                 }
-                    return View("_Success");
+                    return View("Success");
             }
             else
             {

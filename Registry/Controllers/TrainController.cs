@@ -18,11 +18,7 @@ namespace Registry.Controllers
                     && Utilit.checkDate(Request.Form["date"]))
                     using (StationContext context = new StationContext())
                     {
-                        var infoTicket = context.Schedules
-                        .Include(c => c.TransportInfoNavigation)
-                        .Include(k => k.TypeTransport)
-                        .Include(l => l.TransportInfoNavigation.FromCity)
-                        .Include(l => l.TransportInfoNavigation.ToCity);
+                        var infoTicket = Connection.connectionAllClasses(context);
                         List<Schedule> trains = new List<Schedule>();
                         trains.Capacity = 10;
                         /* infoTicket.DateTime = 22.08.2024 22:00:00
@@ -185,7 +181,7 @@ namespace Registry.Controllers
                     }
                     var email = new Email(Request.Form["email"], "Квитки", textTicket.ToString());
                 }
-                return View("_Success");
+                return View("Success");
             }
             else
             {
